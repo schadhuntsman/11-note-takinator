@@ -1,2 +1,1 @@
-# note-takinator
- note taking project challenge for first server project
+# Note Taker Starter Code
