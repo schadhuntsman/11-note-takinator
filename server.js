@@ -4,20 +4,27 @@ const uuid = require('uuid');
 const express = require('express');
 const app = express();
 
-
-
 const PORT = process.env.PORT || 3000;
 app.listen(port);
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(express.static("public"));
 
 //reach public files
 app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, "/db/db.json"));
-    
 });
+
+//start listen
+app.listen(PORT, function () {
+    console.log("listen to PORT: " + PORT);
+});
+
+//call notes __dirname
+app.get('/notes', function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
+});
+
+    
+
 //add new to db.json
 app.post('/api/notes', (req, res) => {
     const notes = JSON.parse(fs.readFileSync('./db/db.json'));
@@ -35,6 +42,8 @@ fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
 res.json(dispatchNote);
 })
 
-//html call home
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static("public"));
 
