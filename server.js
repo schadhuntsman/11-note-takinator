@@ -7,6 +7,10 @@ const express = require('express');
 const PORT = process.env.PORT || 3000;
 app.listen(port);
 
+app.listen(PORT, () => {
+    console.log(`API server now on port+ ${PORT}!`);
+});
+
 const app = express();
 
 
@@ -21,9 +25,7 @@ app.get('/api/notes', (req, res) => {
 // });
 
 //start listen
-app.listen(PORT, () => {
-    console.log(`API server now on port+ ${PORT}!`);
-});
+
 
 //call notes __dirname
 app.get('/notes', function (req, res) {
@@ -45,7 +47,7 @@ app.post('/api/notes', (req, res) => {
 app.delete('/api/notes/:id', (req, res) => {
 const notes = JSON.parse(fs.readFileSync('./db/db.json'));
 const dispatchNote = notes.filter((delNote) => delNote.id !== req.params.id);
-fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
+fs.writeFileSync('.db/db.json', JSON.stringify(              dispatchNote));
 res.json(dispatchNote);
 })
 
