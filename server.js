@@ -2,10 +2,12 @@ const notes = require('./Develop/db/db.json')
 const path = require('path');
 const uuid = require('uuid');
 const express = require('express');
-const app = express();
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(port);
+
+const app = express();
 
 
 //reach public files
@@ -13,9 +15,14 @@ app.get('/api/notes', (req, res) => {
     res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
+// //start listen
+// app.listen(PORT, function () {
+//     console.log("listen to PORT: " + PORT);
+// });
+
 //start listen
-app.listen(PORT, function () {
-    console.log("listen to PORT: " + PORT);
+app.listen(PORT, () => {
+    console.log(`API server now on port+ ${PORT}!`);
 });
 
 //call notes __dirname
