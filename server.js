@@ -31,10 +31,8 @@ app.get('/api/notes', (req, res) => {
  
 });
 
-//call notes __dirname
-app.get('/notes', function (req, res) {
-    res.sendFile(path.join(__dirname, "/public/notes.html"));
-});
+//call home __dirname
+
 
 app.get('/api/notes', function (req, res) {
     res.json(fs.readFileSync(path.join(__dirname, "db/db.json")));
@@ -59,11 +57,20 @@ fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
 res.json(dispatchNote);
 })
 
+//call home
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, '/public/index.html'));
+});
+
+//call notes
+app.get('/notes', function (req, res) {
+    res.sendFile(path.join(__dirname, "/public/notes.html"));
+});
+
 // //start listen
 app.listen(PORT, function () {
     console.log("listen to PORT: " + PORT);
 });
-
 
 
 
