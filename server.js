@@ -50,13 +50,14 @@ app.post('/api/notes', (req, res) => {
     notesNew.id = uuid.v4();
     notes.push(notesNew);
     fs.writeFileSync('./db/db.json', JSON.stringify(notes))
+    res.json(notes);
 });
 
 //delete notes
 app.delete('/api/notes/:id', (req, res) => {
 const notes = JSON.parse(fs.readFileSync('./db/db.json'));
 const dispatchNote = notes.filter((delNote) => delNote.id !== req.params.id);
-fs.writeFileSync('.db/db.json', JSON.stringify(              dispatchNote));
+fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
 res.json(dispatchNote);
 })
 
