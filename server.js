@@ -7,11 +7,12 @@ const { DH_CHECK_P_NOT_SAFE_PRIME } = require('constants');
 const PORT = process.env.PORT || 3003;
 
 
-const findById  = (id, arrayNote) => {
-    const result = arrayNote.filter(note = note.id === id)[0];
-    return result;
-}
+// const findById  = (id, arrayNote) => {
+//     const result = arrayNote.filter(note = note.id === id)[0];
+//     return result;
+// }
 
+//middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -34,9 +35,9 @@ app.get('/api/notes', (req, res) => {
 //call home __dirname
 
 
-app.get('/api/notes', function (req, res) {
-    res.json(fs.readFileSync(path.join(__dirname, "db/db.json")));
-})
+// app.get('/api/notes', function (req, res) {
+//     res.json(fs.readFileSync(path.join(__dirname, "db/db.json")));
+// })
     
 
 //add new to db.json
@@ -51,10 +52,10 @@ app.post('/api/notes', (req, res) => {
 
 //delete notes
 app.delete('/api/notes/:id', (req, res) => {
-const notes = JSON.parse(fs.readFileSync('./db/db.json'));
-const dispatchNote = notes.filter((delNote) => delNote.id !== req.params.id);
-fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
-res.json(dispatchNote);
+    const notes = JSON.parse(fs.readFileSync('./db/db.json'));
+    const dispatchNote = notes.filter((delNote) => delNote.id !== req.params.id);
+    fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
+    res.json(dispatchNote);
 })
 
 //call home
