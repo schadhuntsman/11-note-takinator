@@ -1,37 +1,46 @@
-const notes = require('./Develop/db/db.json')
 const path = require('path');
 const uuid = require('uuid');
 const express = require('express');
+var app = express();
+const fs = require('fs');
+// var PORT = 3003;
+const PORT = process.env.PORT || 3003;
 
 
-const PORT = process.env.PORT || 3000;
-app.listen(port);
-
-app.listen(PORT, () => {
-    console.log(`API server now on port+ ${PORT}!`);
-});
-
-const app = express();
+const findById  = (id, arrayNote) => {
+    const result = arrayNote.filter(note = note.id === id)[0];
+    return result;
+}
 
 
-//reach public files
-app.get('/api/notes', (req, res) => {
-    res.sendFile(path.join(__dirname, "/db/db.json"));
-});
 
-// //start listen
-// app.listen(PORT, function () {
-//     console.log("listen to PORT: " + PORT);
+// console.log(PORT)
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+// app.listen(PORT, () => {
+//     console.log(`API server now on PORT+ ${PORT}!`);
 // });
 
-//start listen
+app.use(express.static('public'))
 
+//reach public files
+app.get('/api/notes/:id', (req, res) => {
+    const notes = JSON.parse(fs.readFileSync('./db/db.json'));
+    const result = findId(req.params.id, notes);    
+    res.json(result);
+    // res.sendFile(path.join(__dirname, "/db/db.json"));
+});
+
+//start listen
 
 //call notes __dirname
 app.get('/notes', function (req, res) {
     res.sendFile(path.join(__dirname, "/public/notes.html"));
 });
 
+app.get('/api/notes', function (req, res) {
+    res.json(fs.readFileSync(path.join(__dirname, "db/db.json")));
+})
     
 
 //add new to db.json
@@ -51,8 +60,7 @@ fs.writeFileSync('.db/db.json', JSON.stringify(              dispatchNote));
 res.json(dispatchNote);
 })
 
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
-
+// //start listen
+app.listen(PORT, function () {
+    console.log("listen to PORT: " + PORT);
+});
