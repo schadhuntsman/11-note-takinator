@@ -20,19 +20,19 @@ app.get('/api/notes', (req, res) => {
 
 //add new to db.json
 app.post('/api/notes', (req, res) => {
-    const notes = JSON.parse(fs.readFileSync('./db/db.json'));
+    const notes = JSON.parse(fs.readFileSync('/db/db.json'));
     const notesNew = req.body;
     notesNew.id = uuid.v4();
     notes.push(notesNew);
-    fs.writeFileSync('./db/db.json', JSON.stringify(notes))
+    fs.writeFileSync(path.join(__dirname, "/db/db.json"), JSON.stringify(notes))
     res.json(notes);
 });
 
 //delete notes
 app.delete('/api/notes/:id', (req, res) => {
-    const notes = JSON.parse(fs.readFileSync('./db/db.json'));
+    const notes = JSON.parse(fs.readFileSync(path.join(__dirname, "/db/db.json")))
     const dispatchNote = notes.filter((delNote) => delNote.id !== req.params.id);
-    fs.writeFileSync('.db/db.json', JSON.stringify(dispatchNote));
+    fs.writeFileSync(path.join(__dirname, "/db/db.json"), JSON.stringify(dispatchNote));
     res.json(dispatchNote);
 })
 
