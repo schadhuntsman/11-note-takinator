@@ -3,41 +3,19 @@ const uuid = require('uuid');
 const express = require('express');
 var app = express();
 const fs = require('fs');
-// const { DH_CHECK_P_NOT_SAFE_PRIME } = require('constants');
 const PORT = process.env.PORT || 3003;
 
-
-// const findById  = (id, arrayNote) => {
-//     const result = arrayNote.filter(note = note.id === id)[0];
-//     return result;
-// }
 
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-// console.log(PORT)
-
-// app.listen(PORT, () => {
-//     console.log(`API server now on PORT+ ${PORT}!`);
-// });
 
 //saves notes and joins
 app.get('/api/notes', (req, res) => {
        res.sendFile(path.join(__dirname, "/db/db.json"));
-    // const notes = JSON.parse(fs.readFileSync('./db/db.json'));
-    // const result = findId(req.params.id, notes);    
-    // res.json(result);
- 
 });
-
-//call home __dirname
-
-
-// app.get('/api/notes', function (req, res) {
-//     res.json(fs.readFileSync(path.join(__dirname, "db/db.json")));
-// })
     
 
 //add new to db.json
