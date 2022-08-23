@@ -66,6 +66,14 @@ const renderActiveNote = () => {
   }
 };
 
+// const handleNoteSave = event => {
+//   const title = $
+//   event.preventDefault();
+
+//   const newNote = () => {
+//     '[title="noteTitle"]'
+//   }
+
 const handleNoteSave = () => {
   const newNote = {
     title: noteTitle.value,
