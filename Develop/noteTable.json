@@ -1,0 +1,8 @@
+   var notesTable =
+[{
+    "title":"",
+    "text":"",
+    "id":""
+}]
+
+module.exports = notesTable
