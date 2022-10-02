@@ -1,1 +1,1 @@
-# Note Taker Starter Code
+Note taker uses Express.js back end to save multiple notes and delete them in real time. 
